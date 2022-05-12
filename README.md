@@ -16,3 +16,21 @@ git clone https://github.com/fvildoso/sqlalchemy-kimetsunoyaiba
 ```
 pip install -r requirements.txt
 ```
+## Ambiente Virtual
+1. Para crear un ambiente virtual
+```  
+python -m venv venv
+```  
+2. Para activar el ambiente virtual
+- Windows PowerShell
+```  
+.\venv\Scripts\Activate.ps1
+``` 
+- Windows CMD
+```  
+.\venv\Scripts\activate.bat
+``` 
+- Unix o MacOS usando bash
+```  
+source venv/bin/activate
+``` 
