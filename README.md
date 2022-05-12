@@ -1,0 +1,17 @@
+# SQLAlchemy - Kimetsu no Yaiba
+
+Este repositorio contiene ejemplos de como usar SQL Alchemy con la base de datos de prueba de Kimetsu no Yaiba
+
+Instrucciones
+
+1. Clonar este repositorio usando
+```
+git clone https://github.com/fvildoso/sqlalchemy-kimetsunoyaiba
+```  
+2. Crear un schema con el nombre que se quiera, para luego en ese mismo schema, restaurar el que se encuentra aqui.
+3. Copiar el archivo .env.example, usando como nombre del archivo simplemente .env
+4. Ajustar en el archivo .env las credenciales de la base de datos, teniendo en cuenta el nombre del schema.
+5. Instalar las dependencias usando
+```
+pip install -r requirements.txt
+```
