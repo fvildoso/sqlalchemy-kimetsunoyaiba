@@ -1,8 +1,9 @@
 # SQLAlchemy - Kimetsu no Yaiba
-
+<img src="https://img.shields.io/github/license/fvildoso/sqlalchemy-kimetsunoyaiba" alt="license">
+<br>
 Este repositorio contiene ejemplos de como usar SQL Alchemy con la base de datos de prueba de Kimetsu no Yaiba
 
-Instrucciones
+## Instrucciones
 
 1. Clonar este repositorio usando
 ```
