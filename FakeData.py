@@ -27,9 +27,11 @@ if __name__ == '__main__':
     session = Session(engine)
 
     # obtener último ID de los cazadores
-    lastId = session.query(Cazadores.id_cazador).order_by(Cazadores.id_cazador.desc()).first().id_cazador
+    lastId = session.query(Cazadores.id_cazador).order_by(Cazadores.id_cazador.desc()).first()
     if lastId is None:
         lastId = 1
+    else:
+        lastId = lastId.id_cazador
     logger.info("LastID Cazador=" + str(lastId))
 
     print()
@@ -50,9 +52,11 @@ if __name__ == '__main__':
     print()
 
     # obtener último ID de los ataques
-    lastId = session.query(Ataques.id_ataque).order_by(Ataques.id_ataque.desc()).first().id_ataque
+    lastId = session.query(Ataques.id_ataque).order_by(Ataques.id_ataque.desc()).first()
     if lastId is None:
         lastId = 1
+    else:
+        lastId = lastId.id_ataque
     logging.info("LastID Ataque=" + str(lastId))
 
     logger.info("Creamos ataques...")
