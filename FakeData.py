@@ -67,3 +67,6 @@ if __name__ == '__main__':
         logger.info(ataque.nombre_ataque)
 
     print()
+
+    # cerramos la sesión con la base de datos
+    session.close()
