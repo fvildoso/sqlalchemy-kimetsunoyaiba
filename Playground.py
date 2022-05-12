@@ -37,7 +37,7 @@ if __name__ == '__main__':
         .join(Cazadores) \
         .where(or_(Cazadores.nombre.like("%milk%"), Cazadores.nombre.like("%test 1%"))) \
         .group_by(Ataques.id_ataque) \
-        .order_by(func.count(Ataques.id_ataque).desc())
+        .order_by(func.count(Ataques.id_ataque).desc()).filter(Ataques.nombre_ataque=='genetic_milk')
     logger.info(query.statement)
 
     for row in query:
