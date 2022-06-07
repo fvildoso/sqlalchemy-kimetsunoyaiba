@@ -1,3 +1,4 @@
+import csv
 import logging
 import os
 from operator import or_
@@ -26,10 +27,27 @@ if __name__ == '__main__':
     # 0. RawQuery
     logger.info("")
     logger.info("# 0. RawQuery")
+
+    # corremos la query que queremos
     resultSet = session.execute('SELECT * FROM cazadores')
 
-    for row in resultSet:
+    # si vamos a usar mas de una vez los resultados, nos serive hacer un fetchall
+    data = resultSet.fetchall()
+
+    # obtenemos el nombre de las columnas
+    columns = resultSet.keys()
+    logger.info(columns)
+    logger.info(resultSet)
+
+    # iteramos sobre la data cruda
+    for row in data:
         logger.info(row)
+
+    # generamos un csv con la data
+    outfile = open('query0.csv', 'w', newline='')
+    outcsv = csv.writer(outfile, delimiter=',')
+    outcsv.writerow(columns)
+    outcsv.writerows(data)
 
     # 1. cazadores que tienen en el nombre one
     logger.info("")
@@ -37,8 +55,19 @@ if __name__ == '__main__':
     query = session.query(Cazadores.nombre, Cazadores.birthday, Cazadores.rango, Cazadores.pais_origen) \
         .where(Cazadores.nombre.like("%one%"))
 
+    # obtenemos las columnas si estamos usando las funcionalidades del ORM
+    columns = [column.get("name") for column in query.column_descriptions]
+    logger.info(columns)
+
+    # iteramos sobre la data, en este caso no es necesario hacer un fetchall
     for row in query:
         logger.info(row)
+
+    # ahora generamos un tsv
+    outfile = open('query1.tsv', 'w', newline='')
+    outcsv = csv.writer(outfile, delimiter='\t')
+    outcsv.writerow(columns)
+    outcsv.writerows(query.all())
 
     # 2. Ataques que mas se repiten para Cazador con Tan o Jiro
     logger.info("")
