@@ -23,7 +23,17 @@ if __name__ == '__main__':
     # iniciamos una sesión
     session = Session(engine)
 
+    # 0. RawQuery
+    logger.info("")
+    logger.info("# 0. RawQuery")
+    resultSet = session.execute('SELECT * FROM cazadores')
+
+    for row in resultSet:
+        logger.info(row)
+
     # 1. cazadores que tienen en el nombre one
+    logger.info("")
+    logger.info("# 1. cazadores que tienen en el nombre one")
     query = session.query(Cazadores.nombre, Cazadores.birthday, Cazadores.rango, Cazadores.pais_origen) \
         .where(Cazadores.nombre.like("%one%"))
 
@@ -31,17 +41,23 @@ if __name__ == '__main__':
         logger.info(row)
 
     # 2. Ataques que mas se repiten para Cazador con Tan o Jiro
-    logger.info("Ataques que más se repiten")
+    logger.info("")
+    logger.info("# 2. Ataques que mas se repiten para Cazador con Tan o Jiro")
     query = session.query(Ataques.nombre_ataque, Ataques.id_ataque, Cazadores.nombre, func.count(Ataques.id_ataque)) \
         .join(CazadoresAtaques.ataques) \
         .join(Cazadores) \
         .where(or_(Cazadores.nombre.like("%milk%"), Cazadores.nombre.like("%test 1%"))) \
         .group_by(Ataques.id_ataque) \
         .order_by(func.count(Ataques.id_ataque).desc()).filter(Ataques.nombre_ataque == 'genetic_milk')
+
+    logger.info("")
+    logger.info("Revisamos la query que está corriendo.")
     logger.info(query.statement)
 
     for row in query:
         logger.info(row)
 
     # cerramos la sesión con la base de datos
+    logger.info("")
+    logger.info("# cerramos la sesión con la base de datos")
     session.close()
